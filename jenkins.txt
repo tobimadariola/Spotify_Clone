@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/Netflix-clone.git'
+                git branch: 'main', url: 'https://github.com/etaoko333/Spotfy-Clone-App.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -53,21 +53,21 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build --build-arg TMDB_V3_API_KEY=<yourtmdbapikey> -t netflix ."
-                       sh "docker tag nsholly333/spotify-clone-appy:latest "
-                       sh "docker push sholly333/spotify-clone-appy:latest "
+                       sh "docker build --build-arg SPOTIFY_API_KEY=${f5ada84e2b584c3dbf47c31e87e01979}= -t spotify ."
+                       sh "docker tag sholly333/spotify:latest "
+                       sh "docker push sholly333/spotify:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sholly333/spotify-clone-appy:latest > trivyimage.txt" 
+                sh "trivy image sholly333/spotify:latest > trivyimage.txt" 
             }
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d -p 8081:3000 sholly333/spotify-clone-app'
+                sh 'docker run -d -p 8081:3000 sholly333/spotify'
             }
         }
         stage('Deploy to kubernets'){
