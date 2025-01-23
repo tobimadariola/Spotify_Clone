@@ -4,6 +4,12 @@ FROM node:16
 # Set the working directory in the container
 WORKDIR /app
 
+# Accept the Spotify API key as a build argument
+ARG SPOTIFY_API_KEY
+
+# Set the environment variable for Spotify API Key (can be used in the application)
+ENV SPOTIFY_API_KEY=${SPOTIFY_API_KEY}
+
 # Copy package.json and yarn.lock to install dependencies
 COPY package.json yarn.lock ./
 

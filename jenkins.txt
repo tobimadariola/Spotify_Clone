@@ -31,7 +31,7 @@ pipeline {
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
                 }
-            } 
+            }
         }
         stage('Install Dependencies') {
             steps {
@@ -71,6 +71,25 @@ pipeline {
         stage('Deploy to Container') {
             steps {
                 sh 'docker run -d -p 8081:3000 sholly333/spotify'
+            }
+        }
+        stage('Create Namespace in Kubernetes') {
+            steps {
+                script {
+                    // Create the namespace if it doesn't exist
+                    sh "kubectl create namespace prometheus-node-exporter || echo 'Namespace already exists'"
+                }
+            }
+        }
+        stage('Deploy Node Exporter') {
+            steps {
+                script {
+                    // Apply Deployment and Service YAML files for node exporter
+                    sh '''
+                    kubectl apply -f node-exporter-deployment.yml -n prometheus-node-exporter
+                    kubectl apply -f node-exporter-service.yml -n prometheus-node-exporter
+                    '''
+                }
             }
         }
         stage('Deploy to Kubernetes') {
