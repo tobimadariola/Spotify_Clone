@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spotify-app-deployment
+  labels:
+    app: spotify-clone-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spotify-clone-app
+  template:
+    metadata:
+      labels:
+        app: spotify-clone-app  # Corrected typo here
+    spec:
+      containers:
+      - name: spotify-clone-app
+        image: sholly333/spotify-app:latest
+        ports:
+        - containerPort: 3000  # Port your app listens on
