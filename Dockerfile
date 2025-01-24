@@ -1,32 +1,29 @@
-# Use the official Node.js image as a parent image
-FROM node:16
+# Use a Node.js base image
+FROM node:18-alpine as build
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Accept the Spotify API key as a build argument
-ARG SPOTIFY_API_KEY
-
-# Set the environment variable for Spotify API Key (can be used in the application)
-ENV SPOTIFY_API_KEY=${SPOTIFY_API_KEY}
-
-# Copy package.json and yarn.lock to install dependencies
+# Copy package files
 COPY package.json yarn.lock ./
 
 # Install dependencies
 RUN yarn install
 
-# Copy the rest of the application code
+# Copy the source code
 COPY . .
 
-# Build the application for production
+# Build the app for production
 RUN yarn build
 
-# Install a simple web server to serve the static files
-RUN npm install -g serve
+# Use a lightweight web server to serve the built app
+FROM nginx:alpine
 
-# Expose the port on which the app will run
-EXPOSE 3000
+# Copy build files to the web server's directory
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Command to run the application
-CMD ["serve", "-s", "build"]
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
