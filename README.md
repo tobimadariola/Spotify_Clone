@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+Deployed My Spotify Clone App Using Docker: A Step-by-Step Guide for Seamless Deployment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+![image](https://github.com/user-attachments/assets/75a02c47-adcf-4efc-ab95-af43dfa554f6)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<img width="960" alt="2025-01-24" src="https://github.com/user-attachments/assets/c4f8bb5d-dc0c-44ab-9dba-6c49f75b48e0" />
 
-### `npm test`
+**Tech Stack and Tools**
+- Here’s the stack that powered my deployment:
+ Frontend: React
+- API Integration: Spotify API
+- Containerization: Docker
+- Server: Nginx
+- Deployment Workflow
+- Here’s a step-by-step breakdown of how I deployed the app:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**💻 1. Setting Up the Project**
+- Developed the Spotify Clone App using React.
+- Integrated the Spotify API for fetching music data using my unique API key.
+- 🐳 2. Dockerizing the Application
 
-### `npm run build`
+**Created a Dockerfile to containerize the app**
+- dockerfile
+- FROM node:18 AS build
+- WORKDIR /app
+- COPY package*.json ./
+- RUN npm install
+- COPY . .
+- RUN npm run build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- FROM nginx:alpine
+- COPY — from=build /app/build /usr/share/nginx/html
+- EXPOSE 80
+- CMD [“nginx”, “-g”, “daemon off;”]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Configured environment variables securely:**
+- REACT_APP_SPOTIFY_API_KEY=(use your api-key)
+- REACT_APP_SPOTIFY_API_KEY=
+- 🚀 3. Running the Container
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Built and ran the Docker image:
+- docker build -t spotify-clone . docker run -d -p 3000:3000 --name spotify-clone-container \ -e REACT_APP_SPOTIFY_API_KEY=f5ada84e2b584c3dbf47c31e87e01979 \ spotify-clone
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<img width="960" alt="2025-01-24 (13)" src="https://github.com/user-attachments/assets/a7bb05f7-9502-4f4e-af8b-95c44b74c35e" />
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+**🌐 4. Verifying the Deployment**
+- Accessed the app at http://localhost:3000.
+- Tested the functionality to ensure everything works perfectly.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+<img width="960" alt="2025-01-24 (20)" src="https://github.com/user-attachments/assets/d3f766a3-babc-4635-8817-d742e1cc6724" />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img width="960" alt="2025-01-24 (21)" src="https://github.com/user-attachments/assets/352f064c-ccf9-4c0b-95cb-91071372ab4d" />
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#Docker #React #SpotifyClone #WebDevelopment #DevOps #Containerization
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
