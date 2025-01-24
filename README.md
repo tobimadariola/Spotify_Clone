@@ -4,7 +4,10 @@ Deployed My Spotify Clone App Using Docker: A Step-by-Step Guide for Seamless De
 
 ![image](https://github.com/user-attachments/assets/75a02c47-adcf-4efc-ab95-af43dfa554f6)
 
-![Uploading 2025-01-24 (12).png…]()
+
+
+
+<img width="960" alt="2025-01-24 (12)" src="https://github.com/user-attachments/assets/67b13038-9925-4ab1-bc81-561d3c08fa66" />
 
 
 
