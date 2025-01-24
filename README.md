@@ -4,9 +4,10 @@ Deployed My Spotify Clone App Using Docker: A Step-by-Step Guide for Seamless De
 
 ![image](https://github.com/user-attachments/assets/75a02c47-adcf-4efc-ab95-af43dfa554f6)
 
+![Uploading 2025-01-24 (12).png…]()
 
 
-<img width="960" alt="2025-01-24" src="https://github.com/user-attachments/assets/c4f8bb5d-dc0c-44ab-9dba-6c49f75b48e0" />
+
 
 **Tech Stack and Tools**
 - Here’s the stack that powered my deployment:
