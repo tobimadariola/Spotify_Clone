@@ -29,7 +29,7 @@ Deployed My Spotify Clone App Using Docker: A Step-by-Step Guide for Seamless De
 **Created a Dockerfile to containerize the app**
 - dockerfile
 - FROM node:18 AS build
-- WORKDIR /app
+- WORKDIR /shopify_clone
 - COPY package*.json ./
 - RUN npm install
 - COPY . .

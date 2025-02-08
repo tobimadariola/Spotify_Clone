@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/etaoko333/Spotfy-Clone-App.git'
+                git branch: 'main', url: 'https://github.com/tobimadariola/Spotify_Clone.git'
             }
         }
         stage("SonarQube Analysis") {
@@ -57,20 +57,20 @@ pipeline {
                         def apiKey = credentials('spotify_api_key') // Example for loading API key
                         
                         // Build the Docker image with the API key
-                        sh "docker build --build-arg SPOTIFY_API_KEY=${apiKey} -t sholly333/spotify:latest ."
-                        sh "docker push sholly333/spotify:latest"
+                        sh "docker build --build-arg SPOTIFY_API_KEY=${apiKey} -t tobimadariola/spotify:latest ."
+                        sh "docker push tobimadariola/spotify:latest"
                     }
                 }
             }
         }
         stage("TRIVY Image Scan") {
             steps {
-                sh "trivy image sholly333/spotify:latest > trivyimage.txt" 
+                sh "trivy image tobimadariola/spotify:latest > trivyimage.txt" 
             }
         }
         stage('Deploy to Container') {
             steps {
-                sh 'docker run -d -p 8081:3000 sholly333/spotify'
+                sh 'docker run -d -p 8081:3000 tobimadariola/spotify'
             }
         }
         stage('Create Namespace in Kubernetes') {
@@ -112,7 +112,7 @@ pipeline {
                 body: "Project: ${env.JOB_NAME}<br/>" +
                       "Build Number: ${env.BUILD_NUMBER}<br/>" +
                       "URL: ${env.BUILD_URL}<br/>",
-                to: 'alongemiracle333@gmail.com',  // Change email here
+                to: 'tobimadariola@gmail.com',  // Change email here
                 attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }

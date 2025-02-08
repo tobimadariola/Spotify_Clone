@@ -2,10 +2,10 @@
 FROM node:18-alpine as build
 
 # Set working directory
-WORKDIR /app
+WORKDIR /spotify_clone
 
 # Copy package files
-COPY package.json yarn.lock ./
+COPY package*.json yarn.lock ./
 
 # Install dependencies
 RUN yarn install
@@ -20,7 +20,7 @@ RUN yarn build
 FROM nginx:alpine
 
 # Copy build files to the web server's directory
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /spotify_clone/build /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
